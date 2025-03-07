@@ -1,6 +1,6 @@
 <img src="https://offering.solutions/wp-content/uploads/2024/03/presentation1-removebg-preview.png" width="30%" height="auto">
 
-# Microservices App made in Java with Spring Boot and Angular
+# Microservices App made in Java with Spring Boot & Angular
 
 Web Services Architecture project in the 5th semester.
 ## Tech Stack
@@ -28,6 +28,6 @@ There are 6 images in total and all of them must be running for the app to work:
 
 #### 3. Now you can access the website:
 
-[localhost:80](localhost:80 "localhost:80")
+http://localhost:80
 
 <img src="https://i.ibb.co/mV6W6mYX/Zrzut-ekranu-2025-03-07-205355.png" width="75%" height="auto">
