@@ -18,7 +18,7 @@ Firstly, you have to install Docker and Git if you dont have them already.
 ```
 docker compose up -d
 ```
-There are 6 images in total:
+There are 6 images in total and all of them must be running for the app to work:
 - brand-microservice
 - car-microservice
 - postgres-brands
@@ -27,6 +27,7 @@ There are 6 images in total:
 - gateway
 
 #### 3. Now you can access the website:
+
 [localhost:80](localhost:80 "localhost:80")
 
 <img src="https://i.ibb.co/mV6W6mYX/Zrzut-ekranu-2025-03-07-205355.png" width="75%" height="auto">
