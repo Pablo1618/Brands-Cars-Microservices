@@ -1,6 +1,6 @@
 <img src="https://offering.solutions/wp-content/uploads/2024/03/presentation1-removebg-preview.png" width="30%" height="auto">
 
-# Microservices App made in Java with Spring Boot & Angular
+# Microservices App made in Java Spring Boot & Angular
 
 Web Services Architecture project in the 5th semester.
 ## Tech Stack
