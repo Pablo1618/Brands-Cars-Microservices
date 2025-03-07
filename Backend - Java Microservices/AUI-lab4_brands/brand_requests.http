@@ -1,0 +1,27 @@
+### Get list of all brands
+GET http://localhost:8081/api/brands
+
+### Add new brand
+POST http://localhost:8081/api/brands
+Content-Type: application/json
+
+{
+    "id": "123e4567-e89b-12d3-a456-426614174000",
+    "brandName": "BMW"
+}
+
+### Get info about specific brand by ID
+GET http://localhost:8081/api/brands/22222222-1234-48f6-96d0-95d3ec2913fd
+
+### Get info about specific brand by name
+GET http://localhost:8081/api/brands/name/Toyota
+
+
+### Delete brand
+DELETE http://localhost:8081/api/brands/Toyota
+
+### Delete brand
+DELETE http://localhost:8081/api/brands/BMW
+
+### Delete brand - this brand doesn't exist
+DELETE http://localhost:8081/api/brands/Honda

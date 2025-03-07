@@ -1,0 +1,275 @@
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Outfit', sans-serif;
+  height: 100vh;
+  background: linear-gradient(to top, #231d30, #504070);
+  overflow: hidden;
+}
+
+.container {
+  display: flex;
+  height: 100%;
+  width: 100%;
+}
+
+.top-bar {
+  font-size:1.5vw;
+  width: 100%;          
+  height: 10%;     
+  background-color: #352c47; 
+  color: white;        
+  display: flex;       
+  justify-content: space-between; 
+  align-items: center;   
+  padding: 0 1.5vw;     
+}
+
+.main-box {
+  display: flex;
+  flex-grow: 1; 
+  width: 100%;
+}
+
+.sidebar-button-text{
+  font-family: 'Outfit', sans-serif;
+  font-weight: normal;
+  font-size: 1vw;
+}
+  
+.sidebar {
+  display: flex; 
+  flex-direction: column;  
+  width: 28vh; 
+  height: 100vh; 
+  background: linear-gradient(to top, #352c47, rgb(98, 80, 134));
+  display: flex;
+  flex-direction: column; 
+  justify-content: flex-start; 
+  padding: 0.5vw;
+  align-items: left; 
+  margin-right: 5vw;
+  margin-left: -0.5vw;
+  border-radius:1vw;
+}
+
+.brand-button {
+  display: flex;
+  align-items:start;
+  justify-content: space-between;
+  background-color: transparent;
+  color: white;
+  padding: 1vw 2vw;
+  margin: 1vw 0;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  cursor:pointer;
+}
+
+.brand-button:hover {
+  background-color: rgba(255, 255, 255, 0.1); 
+}
+
+.brand-info {
+  text-align: left;
+}
+
+.brand-actions {
+  display: flex;
+  gap: 0.5vw; 
+}
+
+.remove-button {
+  background-color: rgb(223, 0, 0);
+  color: white;
+  border: none;
+  padding: 0.5vw 1vw;
+  border-radius: 0.4vw;
+  font-size:1vw;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.edit-button {
+  background-color: rgb(109, 95, 141);
+  color: white;
+  border: none;
+  padding: 0.5vw 1vw;
+  border-radius: 0.4vw;
+  font-size:1vw;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.remove-button:hover {
+  background-color: darkred;
+}
+
+.edit-button:hover {
+  background-color: rgb(71, 55, 105)
+}
+
+.car-list{
+width: 140%;
+}
+
+.car-header i {
+font-size: 1.5rem;
+color: #007BFF;
+}
+
+.car-item-in-brand {
+display:flex;
+align-items: center;
+justify-content: space-between;
+background-color: #28a745;
+border-radius: 0.4vw;
+padding: 0.25vw;
+margin: 0.5vw 0;
+color: white;
+font-size: 0.8vw;
+align-items: center;
+cursor:pointer;
+}
+
+.car-item {
+  display:flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #28a745;
+  border-radius: 0.4vw;
+  padding: 0.25vw;
+  margin: 0.5vw 0;
+  color: white;
+  font-size: 0.8vw;
+  align-items: center;
+  cursor:pointer;
+  transition: font-size 0.3s ease, background-color 0.3s ease;
+}
+
+.car-item:hover {
+background-color: #25973f;
+font-size: 0.9vw;
+}
+
+.fa-solid.fa-car-side {
+  margin-left: 0.5vw;
+  margin-right: 0.5vw;
+}
+
+
+.sidebar button {
+  background-color: transparent;
+  border:none;
+  border-radius: 0.7vw;
+  color: #e4deff;
+  font-size: 1.5vw;
+  padding: 0.2vw;
+  cursor: pointer;
+  margin-bottom: 5vh;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.sidebar button:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #ffffff; 
+}
+
+.content {
+  flex-grow: 1;
+  padding: 20px;
+  color: #fff;
+  height: 89vh;
+  overflow-y: auto;
+}
+
+
+
+.content h1 {
+  font-size: 32px;
+  margin-bottom: 20px;
+}
+
+.content p {
+  font-size: 18px;
+}
+
+
+.car-info {
+  text-align: left;
+}
+
+.car-info-item {
+  font-size:0.7vw;
+  display:flex;
+  align-items: left;
+  background-color: rgb(98, 80, 134);
+  border-radius: 0.4vw;
+  padding: 0.25vw;
+  margin: 0.5vw 0;
+  color: #e4deff;
+}
+
+
+
+
+
+.form-container {
+  width:94%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  background-color: #f8f8f8;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.form-item {
+  font-size:0.9vw;
+  color: black;
+  margin-bottom:1vw;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.form-item input{
+  font-size:0.7vw;
+    font-family: 'Outfit', sans-serif;
+}
+
+label {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+input {
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+  border: 1px solid #ccc;
+}
+
+button {
+  margin-top: 1rem;
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  border: none;
+  background-color: #2596be;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #1d7fa3;
+}

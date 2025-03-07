@@ -1,0 +1,81 @@
+
+### Get list of all cars
+GET http://localhost:8082/api/cars
+
+### Get info about car by ID
+GET http://localhost:8082/api/cars/782ebb2a-10e3-48f6-96d0-95d3ec2913fd
+
+### Delete car
+DELETE http://localhost:8082/api/cars/782ebb2a-10e3-48f6-96d0-95d3ec2913fd
+
+### Add new car
+POST http://localhost:8082/api/cars
+Content-Type: application/json
+
+{
+    "id": "123e4567-e89b-12d3-a456-426664169001",
+    "modelName": "Prius",
+    "productionYear": 2014,
+    "brandName": "Toyota"
+}
+
+### Add new car
+POST http://localhost:8082/api/cars
+Content-Type: application/json
+
+{
+    "id": "123e4567-e89b-12d3-a456-421234169702",
+    "modelName": "M3",
+    "productionYear": 2019,
+    "brandName": "BMW"
+}
+
+### Add new car
+POST http://localhost:8082/api/cars
+Content-Type: application/json
+
+{
+    "id": "123e4567-e89b-12d3-a456-421234169321",
+    "modelName": "X5",
+    "productionYear": 2019,
+    "brandName": "BMW"
+}
+
+### Get all cars from specific Brand
+GET http://localhost:8082/api/cars/brandname/BMW
+
+### Get info about car by ID
+GET http://localhost:8082/api/cars/6921372a-10e3-48f6-96d0-55d3ec291344
+
+### Update car
+PUT http://localhost:8082/api/cars/6921372a-10e3-48f6-96d0-55d3ec291344
+Content-Type: application/json
+
+{
+    "id": "6921372a-10e3-48f6-96d0-55d3ec291344",
+    "modelName": "Land Cruiser",
+    "productionYear": 2020,
+    "brandName": "Toyota"
+}
+
+
+
+### Delete car - car with this ID doesn't exist
+DELETE http://localhost:8082/api/cars/1234562a-10e3-48f6-96d0-95d3ec123456
+
+### Get all cars from specific Brand - brand with this ID doesn't exist
+GET http://localhost:8082/api/cars/brands/12169123-1234-48f6-96d0-95d3ec2913fd
+
+### Get info about car by ID - but car with this ID doesn't exist
+GET http://localhost:8082/api/cars/12345678-10e3-48f6-96d0-95d3ec2913fd
+
+### Add new car - this brand doesn't exist
+POST http://localhost:8082/api/cars
+Content-Type: application/json
+
+{
+    "id": "999e4567-e89b-12d3-a456-426614789999",
+    "modelName": "Civic",
+    "productionYear": 2023,
+    "brandName": "Honda"
+}

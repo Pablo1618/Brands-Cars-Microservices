@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Parkinsans:wght@300..800&display=swap" rel="stylesheet">
+  
+</head>
+<body>
+  <div class="top-bar">
+    <span>
+      <i style="font-size:2vw;" class="fa-brands fa-angular"></i>
+      AUI - Lab 5
+    </span>
+    <span style="align-items: left;">Brands-Cars Microservices App</span>
+  </div>
+  <div class="container">
+    <div class="sidebar">
+      <button style="margin-top:4vw;"><i class="fas fa-home"></i><div class="sidebar-button-text">Home</div></button>
+      <button (click)="showBrandsList()"><i class="fa-solid fa-copyright"></i><div class="sidebar-button-text">Brands</div></button>
+      <button (click)="showCarsList()"><i class="fa-solid fa-car"></i><div class="sidebar-button-text">Cars</div></button>
+
+      <button style="margin-top:10vw;" (click)="showNewCarCreateForm()"><i class="fa-solid fa-plus"></i><div class="sidebar-button-text">Add new car</div></button>
+      <button style="margin-top:0px;" (click)="showNewBrandCreateForm()"><i class="fa-solid fa-square-plus"></i><div class="sidebar-button-text">Add new brand</div></button>
+    </div>
+
+    <div class="content">
+
+      <div *ngIf="currentPage==='BrandsList' ">
+        <div style="font-size:1vw;  margin-top:2vh">Available Car Brands:</div>
+        <div *ngFor="let brand of brands" class="brand-button" (click)="toggleBrandDetails(brand.id, brand.brandName)">
+          <div class="brand-info">
+            <p style="font-size:0.8vw;"><strong>{{ brand.brandName }}</strong></p>
+            <p style="font-size:0.6vw;"><strong>ID:</strong> {{ brand.id }}</p>
+      
+            <div *ngIf="expandedBrandId === brand.id" class="car-list">
+              <br>
+              <div *ngFor="let car of cars" class="car-item-in-brand">
+                <div><i class="fa-solid fa-car-side"> </i>{{ car.modelName }} ({{ car.id }})</div>
+                <div class="brand-actions">
+                  <button style="font-size:0.8vw;" class="remove-button" (click)="deleteCar(car.id); toggleBrandDetails(brand.id, brand.brandName)"><i class="fa-solid fa-trash-can"></i></button>
+                </div>
+              </div>
+            </div>
+          </div>
+      
+          <div class="brand-actions">
+            <button class="edit-button" (click)="showBrandEditForm(brand.id, brand.brandName)">
+              <i class="fa-solid fa-pen-to-square"></i>
+            </button>
+            <button class="remove-button" (click)="deleteBrand(brand.brandName)">
+              <i class="fa-solid fa-trash-can"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="currentPage==='CarsList' ">
+        <div style="font-size:1vw;  margin-top:2vh">Available Cars:</div>
+          <div *ngFor="let car of cars" style="display:flex; width:50%;" class="car-item" (click)="toggleCarDetails(car.id)">
+            <div class="car-info">
+              <div><i class="fa-solid fa-car-side"> </i>{{ car.modelName }} ({{ car.id }})</div>
+
+              <div *ngIf="expandedCarId === car.id">
+                <div>
+                  <br>
+                  <span class="car-info-item"><i class="fa-regular fa-copyright"></i>&nbsp;&nbsp;{{ carInfoElement?.brandName }}</span>
+                  <span class="car-info-item"><i class="fa-regular fa-calendar-days"></i>&nbsp;&nbsp;{{ carInfoElement?.productionYear }}</span>
+                  <span class="car-info-item"><i class="fa-solid fa-car"></i>&nbsp;ID:&nbsp;{{ carInfoElement?.id }}</span>
+                  <span class="car-info-item"><i class="fa-regular fa-copyright"></i>&nbsp;ID:&nbsp;{{ carInfoElement?.brandId }}</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="brand-actions">
+                <button style="font-size:0.8vw;" class="edit-button" (click)="showCarEditForm(car.id)">
+                  <i class="fa-solid fa-pen-to-square"></i>
+                </button>
+                <button style="font-size:0.8vw;" class="remove-button"  (click)="deleteCar(car.id)">
+                  <i class="fa-solid fa-trash-can"></i>
+                </button>
+            </div>
+          </div>
+      </div>
+
+      <div *ngIf="currentPage==='CarCreationForm' " class="form-container">
+        <form (ngSubmit)="submitNewCarCreation()">
+          <div class="form-item">
+            <label for="id">ID:</label>
+            <input type="text" id="id" name="id" [(ngModel)]="newCar.id" required />
+          </div>
+          <div class="form-item">
+            <label for="modelName">Model Name:</label>
+            <input type="text" id="modelName" name="modelName" [(ngModel)]="newCar.modelName" required />
+          </div>
+          <div class="form-item">
+            <label for="productionYear">Production Year:</label>
+            <input type="number" id="productionYear" name="productionYear" [(ngModel)]="newCar.productionYear" required />
+          </div>
+          <div class="form-item">
+            <label for="brandName">Brand:</label>
+            <input type="text" id="brandName" name="brandName" [(ngModel)]="newCar.brandName" required />
+          </div>
+          <button type="submit"><i class="fa-solid fa-plus"></i> Add Car</button>
+        </form>
+      </div>
+
+      <div *ngIf="currentPage==='BrandCreationForm' " class="form-container">
+        <form (ngSubmit)="submitNewBrandCreation()">
+          <div class="form-item">
+            <label for="id">ID:</label>
+            <input type="text" id="id" name="id" [(ngModel)]="newBrand.id" required />
+          </div>
+          <div class="form-item">
+            <label for="brandName">Brand name:</label>
+            <input type="text" id="brandName" name="brandName" [(ngModel)]="newBrand.brandName" required />
+          </div>
+          <button type="submit"><i class="fa-solid fa-plus"></i> Add Brand</button>
+        </form>
+      </div>
+      
+      <div *ngIf="currentPage==='CarEditForm'" class="form-container">
+        <form (ngSubmit)="submitCarEdit()">
+          <div class="form-item">
+            <label for="id">ID:</label>
+            <input style="cursor:not-allowed"  type="text" id="id" name="id" [(ngModel)]="newCar.id" required readonly />
+          </div>
+          <div class="form-item">
+            <label for="modelName">Model Name:</label>
+            <input type="text" id="modelName" name="modelName" [(ngModel)]="newCar.modelName" required />
+          </div>
+          <div class="form-item">
+            <label for="productionYear">Production Year:</label>
+            <input type="number" id="productionYear" name="productionYear" [(ngModel)]="newCar.productionYear" required />
+          </div>
+          <div class="form-item">
+            <label for="brandName">Brand:</label>
+            <input type="text" id="brandName" name="brandName" [(ngModel)]="newCar.brandName" required />
+          </div>
+          <button style="background-color:rgb(190, 124, 0)" type="submit"><i class="fa-solid fa-pen-to-square"></i> Edit Car</button>
+        </form>
+      </div>
+
+      <div *ngIf="currentPage==='BrandEditForm'" class="form-container">
+        <form (ngSubmit)="submitBrandEdit()">
+          <div class="form-item">
+            <label for="id">ID:</label>
+            <input style="cursor:not-allowed"  type="text" id="id" name="id" [(ngModel)]="newBrand.id" required readonly />
+          </div>
+          <div class="form-item">
+            <label for="modelName">Brand Name:</label>
+            <input type="text" id="modelName" name="modelName" [(ngModel)]="newBrand.brandName" required />
+          </div>
+          <button style="background-color:rgb(190, 124, 0)" type="submit"><i class="fa-solid fa-pen-to-square"></i> Edit Brand</button>
+        </form>
+      </div>
+
+    </div>
+  </div>
+  
+</body>
+</html>

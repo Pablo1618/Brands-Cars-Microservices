@@ -1,0 +1,111 @@
+###
+### HTML Requests for Spring Cloud Gateway
+###
+### Brands Microservice -> 8081
+### Cars Microservice   -> 8082
+### Gateway             -> 8080
+###
+
+### Get list of all cars
+GET http://localhost:8080/api/cars
+
+#### Get list of all brands
+GET http://localhost:8081/api/brands
+
+### Get info about car by ID
+GET http://localhost:8080/api/cars/782ebb2a-10e3-48f6-96d0-95d3ec2913fd
+
+### Delete car (Toyota Corolla)
+DELETE http://localhost:8080/api/cars/782ebb2a-10e3-48f6-96d0-95d3ec2913fd
+
+### Add new brand
+POST http://localhost:8080/api/brands
+Content-Type: application/json
+
+{
+    "id": "123e4567-e89b-12d3-a456-426614174000",
+    "brandName": "BMW"
+}
+
+#### Get list of all brands
+GET http://localhost:8080/api/brands
+
+### Add new car
+POST http://localhost:8080/api/cars
+Content-Type: application/json
+
+{
+    "id": "123e4567-e89b-12d3-a456-426614169000",
+    "modelName": "X5",
+    "productionYear": 2023,
+    "brandName": "BMW"
+}
+
+### Add new car
+POST http://localhost:8080/api/cars
+Content-Type: application/json
+
+{
+    "id": "123e4567-e89b-12d3-a456-421234169000",
+    "modelName": "M3",
+    "productionYear": 2019,
+    "brandName": "BMW"
+}
+
+### Get all cars from specific Brand
+GET http://localhost:8080/api/cars/brandname/BMW
+
+### Delete brand
+DELETE http://localhost:8080/api/brands/BMW
+
+#### Get list of all brands
+GET http://localhost:8080/api/brands
+
+### Get list of all cars
+GET http://localhost:8080/api/cars
+
+### Get info about car by ID
+GET http://localhost:8080/api/cars/6921372a-10e3-48f6-96d0-55d3ec291344
+
+### Update car
+PUT http://localhost:8080/api/cars/6921372a-10e3-48f6-96d0-55d3ec291344
+Content-Type: application/json
+
+{
+    "id": "6921372a-10e3-48f6-96d0-55d3ec291344",
+    "modelName": "Land Cruiser",
+    "productionYear": 2020,
+    "brandName": "Toyota"
+}
+
+### Update brand
+PUT http://localhost:8080/api/brands/123e4567-e89b-12d3-a456-426614174000
+Content-Type: application/json
+
+{
+    "id": "123e4567-e89b-12d3-a456-426614174000",
+    "brandName": "Bayerische Motoren Werke"
+}
+
+### Delete car - car with this ID doesn't exist
+DELETE http://localhost:8080/api/cars/1234562a-10e3-48f6-96d0-95d3ec123456
+
+### Delete brand - brand with this ID doesn't exist
+DELETE http://localhost:8080/api/brands/12169123-1234-48f6-96d0-95d3ec2913fd
+
+### Get all cars from specific Brand - brand with this name doesn't exist
+GET http://localhost:8080/api/cars/brandname/Honda
+
+### Get info about car by ID - but car with this ID doesn't exist
+GET http://localhost:8080/api/cars/12345678-10e3-48f6-96d0-95d3321913fd
+
+### Add new car - this brand doesn't exist
+POST http://localhost:8080/api/cars
+Content-Type: application/json
+
+{
+    "id": "999e4567-e89b-12d3-a456-426614789999",
+    "modelName": "Civic",
+    "productionYear": 2023,
+    "brandName": "Honda"
+}

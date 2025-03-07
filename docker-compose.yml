@@ -1,0 +1,92 @@
+version: '3.8'
+
+services:
+  brand-microservice:
+    build:
+      context: "./Backend - Java Microservices/AUI-lab4_brands"
+    ports:
+      - "8081:8081"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres_brands:5432/branddb
+      - SPRING_DATASOURCE_DRIVER_CLASS_NAME=org.postgresql.Driver
+      - SPRING_DATASOURCE_USERNAME=admin
+      - SPRING_DATASOURCE_PASSWORD=admin
+      - SPRING_APPLICATION_NAME=brand-microservice
+      - SERVER_PORT=8081
+    networks:
+      - app-network
+    depends_on:
+      - postgres_brands
+
+  car-microservice:
+    build:
+      context: "./Backend - Java Microservices/AUI-lab4_cars"
+    ports:
+      - "8082:8082"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres_cars:5432/cardb
+      - SPRING_DATASOURCE_DRIVER_CLASS_NAME=org.postgresql.Driver
+      - SPRING_DATASOURCE_USERNAME=admin
+      - SPRING_DATASOURCE_PASSWORD=admin
+      - SPRING_APPLICATION_NAME=car-microservice
+      - SERVER_PORT=8082
+    networks:
+      - app-network
+    depends_on:
+      - postgres_cars
+
+  gateway:
+    build:
+      context: "./Backend - Java Microservices/AUI-lab4_gateway"
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_APPLICATION_NAME=gateway-service
+      - SERVER_PORT=8080
+      - SPRING_CLOUD_GATEWAY_ROUTES_0_ID=brands-service
+      - SPRING_CLOUD_GATEWAY_ROUTES_0_URI=http://brand-microservice:8081
+      - SPRING_CLOUD_GATEWAY_ROUTES_0_PREDICATES_0=Path=/api/brands/**
+      - SPRING_CLOUD_GATEWAY_ROUTES_1_ID=cars-service
+      - SPRING_CLOUD_GATEWAY_ROUTES_1_URI=http://car-microservice:8082
+      - SPRING_CLOUD_GATEWAY_ROUTES_1_PREDICATES_0=Path=/api/cars/**
+      - SPRING_MAIN_WEB_APPLICATION_TYPE=reactive
+    networks:
+      - app-network
+
+  angular-app:
+    build:
+      context: "./Frontend - Angular"
+    container_name: angular-app
+    ports:
+      - "80:80"
+    environment:
+      - NGINX_HOST=localhost
+      - NGINX_PORT=80
+    networks:
+      - app-network
+
+  postgres_brands:
+    image: postgres:15.2
+    environment:
+      POSTGRES_DB: branddb
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+    ports:
+      - "5432:5432"
+    networks:
+      - app-network
+
+  postgres_cars:
+    image: postgres:15.2
+    environment:
+      POSTGRES_DB: cardb
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+    ports:
+      - "5433:5432"
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
